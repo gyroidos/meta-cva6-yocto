@@ -1,3 +1,5 @@
+Upstream-Status: Pending
+
 diff --git a/include/uapi/linux/serial_reg.h b/include/uapi/linux/serial_reg.h
 index be07b5470f4b..6f97aa19ba59 100644
 --- a/include/uapi/linux/serial_reg.h
