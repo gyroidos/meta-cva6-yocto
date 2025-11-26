@@ -1,0 +1,75 @@
+diff --git a/drivers/mmc/host/dw_mmc.c b/drivers/mmc/host/dw_mmc.c
+index e67e6c620ef9..11b6f6cbef02 100644
+--- a/drivers/mmc/host/dw_mmc.c
++++ b/drivers/mmc/host/dw_mmc.c
+@@ -2897,7 +2897,8 @@ static void dw_mci_init_dma(struct dw_mci *host)
+ 	* simpler request/acknowledge handshake mechanism and both of them
+ 	* are regarded as external dma master for dw_mmc.
+ 	*/
+-	host->use_dma = SDMMC_GET_TRANS_MODE(mci_readl(host, HCON));
++	host->use_dma =DMA_INTERFACE_NODMA;
++	// host->use_dma = SDMMC_GET_TRANS_MODE(mci_readl(host, HCON));
+ 	if (host->use_dma == DMA_INTERFACE_IDMA) {
+ 		host->use_dma = TRANS_MODE_IDMAC;
+ 	} else if (host->use_dma == DMA_INTERFACE_DWDMA ||
+diff --git a/drivers/mmc/host/dw_mmc.c b/drivers/mmc/host/dw_mmc.c
+index 43c5795691fb..fbb6fc976e9b 100644
+--- a/drivers/mmc/host/dw_mmc.c
++++ b/drivers/mmc/host/dw_mmc.c
+@@ -2333,9 +2333,14 @@ static void dw_mci_push_data32(struct dw_mci *host, void *buf, int cnt)
+ #endif
+ 	{
+ 		u32 *pdata = buf;
++		u32 status =0;
+ 
+-		for (; cnt >= 4; cnt -= 4)
++		for (; cnt >= 4; cnt -= 4){
+ 			mci_fifo_writel(host->fifo_reg, *pdata++);
++			status = mci_readl(host, STATUS);
++			if(status & 8)
++				dev_warn(host->dev,"FIFO FULL: %x\n",status);
++		}
+ 		buf = pdata;
+ 	}
+ 	/* put anything remaining in the part_buf */
+diff --git a/drivers/mmc/core/block.c b/drivers/mmc/core/block.c
+index 42e27a298218..f8eee5253a66 100644
+--- a/drivers/mmc/core/block.c
++++ b/drivers/mmc/core/block.c
+@@ -1489,7 +1489,7 @@ static int mmc_blk_hsq_issue_rw_rq(struct mmc_queue *mq, struct request *req)
+ 	struct mmc_host *host = mq->card->host;
+ 	int err;
+ 
+-	mmc_blk_rw_rq_prep(mqrq, mq->card, 0, mq);
++	mmc_blk_rw_rq_prep(mqrq, mq->card, 1, mq);
+ 	mqrq->brq.mrq.done = mmc_blk_hsq_req_done;
+ 	mmc_pre_req(host, &mqrq->brq.mrq);
+ 
+@@ -2143,7 +2143,7 @@ static int mmc_blk_mq_issue_rw_rq(struct mmc_queue *mq,
+ 	struct request *prev_req = NULL;
+ 	int err = 0;
+ 
+-	mmc_blk_rw_rq_prep(mqrq, mq->card, 0, mq);
++	mmc_blk_rw_rq_prep(mqrq, mq->card, 1, mq);
+ 
+ 	mqrq->brq.mrq.done = mmc_blk_mq_req_done;
+ 
+diff --git a/drivers/mmc/core/sd.c b/drivers/mmc/core/sd.c
+index 6f054c449d46..c0b9d2b73f55 100644
+--- a/drivers/mmc/core/sd.c
++++ b/drivers/mmc/core/sd.c
+@@ -366,7 +366,7 @@ int mmc_sd_switch_hs(struct mmc_card *card)
+ 	if (!(card->csd.cmdclass & CCC_SWITCH))
+ 		return 0;
+ 
+-	if (!(card->host->caps & MMC_CAP_SD_HIGHSPEED))
++	// if (!(card->host->caps & MMC_CAP_SD_HIGHSPEED)) 
+ 		return 0;
+ 
+ 	if (card->sw_caps.hs_max_dtr == 0)
+
+
+
+ 
+
+
