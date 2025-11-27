@@ -7,8 +7,7 @@ SRC_URI = "git://github.com/openhwgroup/u-boot.git;protocol=https;branch=cva6 \
            file://tftp-mmc-boot.txt \
            "
 SRC_URI:append:cv32a6-genesys2 = "file://devtool-fragment.cfg \
-                                  file://0004-CV64A6-add-ext4-and-fat-functionalities.patch \
-                                  file://0005-CV64A6-add-fitImage-support.patch \
+                                  file://0006-CV32A6-FIT-FAT-EXT4-LOWRISC-defconfig.patch \
                                   "
 
 SRC_URI:append:cv64a6-genesys2 = "file://devtool-fragment.cfg \

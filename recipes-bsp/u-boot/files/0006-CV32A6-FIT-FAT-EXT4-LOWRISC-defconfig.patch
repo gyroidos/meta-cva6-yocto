@@ -8,16 +8,10 @@ Subject: [PATCH] CV32A6: FIT, FAT, EXT4, LOWRISC defconfig
  1 file changed, 4 insertions(+)
 
 diff --git a/configs/openhwgroup_cv32a6_genesysII_defconfig b/configs/openhwgroup_cv32a6_genesysII_defconfig
-index 6b7765ac09..2f85de5886 100644
+index 35cccdd0ed..764b0a2849 100644
 --- a/configs/openhwgroup_cv32a6_genesysII_defconfig
 +++ b/configs/openhwgroup_cv32a6_genesysII_defconfig
-@@ -30,8 +30,12 @@ CONFIG_SPI_FLASH_STMICRO=y
- CONFIG_SPI_FLASH_SST=y
- CONFIG_SPI_FLASH_WINBOND=y
- CONFIG_SPI_FLASH_XMC=y
-+CONFIG_LOWRISC_DIGILENT_100MHZ=y
- # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
- CONFIG_SPI_FLASH_MTD=y
+@@ -40,3 +40,6 @@ CONFIG_SPI_FLASH_MTD=y
  CONFIG_SYS_NS16550=y
  CONFIG_SPI=y
  CONFIG_XILINX_SPI=y
