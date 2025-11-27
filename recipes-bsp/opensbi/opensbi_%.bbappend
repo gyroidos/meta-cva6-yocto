@@ -8,5 +8,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://0001-rename-ariane-to-cva6.patch \
             file://0001-Reverting-Makefile-Don-t-specify-mabi-or-march.patch \
-            file://opensbi.patch \
             "
+SRC_URI:append:cv32a6-agilex7 = "file://opensbi.patch"
+SRC_URI:append:cv64a6-agilex7 = "file://opensbi.patch"
