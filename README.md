@@ -51,7 +51,7 @@ This layer is available for:
 
 * **cv64a6-genesys2**: The Digilent FPGA board with the bitstream generated from the [cva6 corev-apu](https://github.com/openhwgroup/cva6) with target default target *cv64a6_imafdc_sv39*.
 * **cv32a6-genesys2**: Same board with the bitstream generated from the [cva6 corev-apu](https://github.com/openhwgroup/cva6) with target *cv32a6_ima_sv32_fpga*.
-* **cv64a6-agilex7**: The [Altera FPGA board] (https://www.altera.com/products/devkit/a1jui0000061rlpmay/agilex-7-fpga-f-series-development-kit-p-tile-and-e-tile-rev) with the bitstream generated from the [cva6 corev-apu](https://github.com/openhwgroup/cva6) with target default target *cv64a6_imafdc_sv39*.
+* **cv64a6-agilex7**: The [Altera FPGA board](https://www.altera.com/products/devkit/a1jui0000061rlpmay/agilex-7-fpga-f-series-development-kit-p-tile-and-e-tile-rev) with the bitstream generated from the [cva6 corev-apu](https://github.com/openhwgroup/cva6) with target default target *cv64a6_imafdc_sv39*.
 * **cv32a6-agilex7**: Same board with the bitstream generated from the [cva6 corev-apu](https://github.com/openhwgroup/cva6) with target *cv32a6_ima_sv32_fpga*.
 
 ## Build and flash your image
@@ -75,7 +75,7 @@ The login is "root", no password is needed.
 cd agilex7-sd
 make format-sd SDDEVICE=/dev/sdX
 make flash-sd  SDDEVICE=/dev/sdX MACHINE=cv32a6-agilex7
-```text
+```
 
 *NOTE: You may need to remove and insert the SD card between format and flash commands.
 
