@@ -17,7 +17,7 @@ null::sysinit:/bin/busybox hostname -F /etc/hostname
 ::sysinit:/etc/init.d/rcS
 
 # Put a getty on the serial port
-#console::respawn:/sbin/getty -L  console 0 vt100 # GENERIC_SERIAL
+console::respawn:/sbin/getty -L  console 0 vt100 # GENERIC_SERIAL
 # Autologin, reference : https://unix.stackexchange.com/a/300152
 #::respawn:-/bin/sh
 

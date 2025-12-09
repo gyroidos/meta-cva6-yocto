@@ -51,6 +51,8 @@ This layer is available for:
 
 * **cv64a6-genesys2**: The Digilent FPGA board with the bitstream generated from the [cva6 corev-apu](https://github.com/openhwgroup/cva6) with target default target *cv64a6_imafdc_sv39*.
 * **cv32a6-genesys2**: Same board with the bitstream generated from the [cva6 corev-apu](https://github.com/openhwgroup/cva6) with target *cv32a6_ima_sv32_fpga*.
+* **cv64a6-agilex7**: The [Altera FPGA board](https://www.altera.com/products/devkit/a1jui0000061rlpmay/agilex-7-fpga-f-series-development-kit-p-tile-and-e-tile-rev) with the bitstream generated from the [cva6 corev-apu](https://github.com/openhwgroup/cva6) with target default target *cv64a6_imafdc_sv39*.
+* **cv32a6-agilex7**: Same board with the bitstream generated from the [cva6 corev-apu](https://github.com/openhwgroup/cva6) with target *cv32a6_ima_sv32_fpga*.
 
 ## Build and flash your image
 
@@ -60,11 +62,22 @@ MACHINE=cv32a6-genesys2 bitbake core-image-minimal
 ```
 Image files will be located in build/tmp-glibc/deploy/images/cv32a6-genesys2.
 
+### Flashing in Genesys II
 Warning, you need to find the correct device image and fill it in the dd's of= parameter:
 
 ```text
 gunzip -c build/tmp-glibc/deploy/images/cv32a6-genesys2/core-image-minimal-cv32a6-genesys2.wic.gz | sudo dd of=/dev/sd$ bs=1M iflag=fullblock oflag=direct conv=fsync status=progress
 ```
+The login is "root", no password is needed.
+
+### Flashing in Agilex7
+```text
+cd agilex7-sd
+make format-sd SDDEVICE=/dev/sdX
+make flash-sd  SDDEVICE=/dev/sdX MACHINE=cv32a6-agilex7
+```
+
+*NOTE: You may need to remove and insert the SD card between format and flash commands.
 
 The login is "root", no password is needed.
 

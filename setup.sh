@@ -4,7 +4,7 @@
 DIR="build"
 MACHINE="cv32a6-genesys2"
 CONFFILE="conf/auto.conf"
-BITBAKEIMAGE="core-image-full-cmdline"
+BITBAKEIMAGE="core-image-minimal"
 
 # make sure sstate is there
 #echo "Creating sstate directory"
@@ -87,9 +87,14 @@ echo "Buildable machine info"
 echo "---------------------------------------------------"
 echo "* cv64a6-genesys2: The OpenHW CV64A6 SoC on Genesys2"
 echo "* cv32a6-genesys2: The OpenHW CV32A6 SoC on Genesys2"
+echo "* cv64a6-agilex7 : The OpenHW CV64A6 SoC on Agilex7"
+echo "* cv32a6-agilex7 : The OpenHW CV32A6 SoC on Agilex7"
 echo "---------------------------------------------------"
+
+cd ../openembedded-core
+for i in ../meta-cva6-yocto/patch/*.patch; do patch -p1 -N < "$i"; done
 
 # start build
 #echo "Starting build"
-#bitbake $BITBAKEIMAGE
+# bitbake $BITBAKEIMAGE
 
