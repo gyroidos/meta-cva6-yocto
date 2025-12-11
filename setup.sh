@@ -91,9 +91,6 @@ echo "* cv64a6-agilex7 : The OpenHW CV64A6 SoC on Agilex7"
 echo "* cv32a6-agilex7 : The OpenHW CV32A6 SoC on Agilex7"
 echo "---------------------------------------------------"
 
-cd ../openembedded-core
-for i in ../meta-cva6-yocto/patch/*.patch; do patch -p1 -N < "$i"; done
-
 # start build
 #echo "Starting build"
 # bitbake $BITBAKEIMAGE
