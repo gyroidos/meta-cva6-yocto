@@ -75,13 +75,14 @@ The login is "root", no password is needed.
 
 ### Flashing in Agilex7
 ```text
-cd agilex7-sd
-make format-sd SDDEVICE=/dev/sdX
-make flash-sd  SDDEVICE=/dev/sdX MACHINE=cv32a6-agilex7
+gunzip -c build/tmp/deploy/images/cv32a6-agilex7/core-image-minimal-cv32a6-agilex7.wic.gz | sudo dd of=/dev/sd$ bs=1M iflag=fullblock oflag=direct conv=fsync status=progress
 ```
 
-*NOTE: You may need to remove and insert the SD card between format and flash commands.
+Or use bmaptool if you have it:
 
+```text
+sudo bmaptool copy build/tmp/deploy/images/cv32a6-agilex7/core-image-minimal-cv32a6-agilex7.wic.gz /dev/sd$
+```
 The login is "root", no password is needed.
 
 ## Yocto SDK
